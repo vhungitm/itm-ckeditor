@@ -32,9 +32,10 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
-import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter'; // NEW
-import ImageResizeEditing from '@ckeditor/ckeditor5-image/src/imageresize/imageresizeediting'; // NEW
-import ImageResizeHandles from '@ckeditor/ckeditor5-image/src/imageresize/imageresizehandles'; // NEWS
+import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
+import ImageResizeEditing from '@ckeditor/ckeditor5-image/src/imageresize/imageresizeediting';
+import ImageResizeHandles from '@ckeditor/ckeditor5-image/src/imageresize/imageresizehandles';
+import ImageResizeButton from '@ckeditor/ckeditor5-image/src/imageresize/imageresizebuttons';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -66,9 +67,10 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	Base64UploadAdapter, // NEW
-	ImageResizeEditing, // NEW
-	ImageResizeHandles // NEW
+	Base64UploadAdapter,
+	ImageResizeEditing,
+	ImageResizeHandles,
+	ImageResizeButton
 ];
 
 // Editor configuration.
@@ -90,13 +92,34 @@ ClassicEditor.defaultConfig = {
 			'blockQuote',
 			'insertTable',
 			'mediaEmbed',
+			'|',
 			'undo',
-			'redo',
-			'resizeImage' // NEW
+			'redo'
 		]
 	},
 	image: {
+		resizeOptions: [
+			{
+				name: 'resizeImage:original',
+				value: null,
+				icon: 'original'
+			},
+			{
+				name: 'resizeImage:50',
+				value: '50',
+				icon: 'medium'
+			},
+			{
+				name: 'resizeImage:75',
+				value: '75',
+				icon: 'large'
+			}
+		],
 		toolbar: [
+			'resizeImage:50',
+			'resizeImage:75',
+			'resizeImage:original',
+			'|',
 			'imageStyle:inline',
 			'imageStyle:block',
 			'imageStyle:side',
