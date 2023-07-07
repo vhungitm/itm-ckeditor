@@ -36,6 +36,9 @@ import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64u
 import ImageResizeEditing from '@ckeditor/ckeditor5-image/src/imageresize/imageresizeediting';
 import ImageResizeHandles from '@ckeditor/ckeditor5-image/src/imageresize/imageresizehandles';
 import ImageResizeButton from '@ckeditor/ckeditor5-image/src/imageresize/imageresizebuttons';
+import FontSize from '@ckeditor/ckeditor5-font/src/font';
+import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
+import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -70,7 +73,10 @@ ClassicEditor.builtinPlugins = [
 	Base64UploadAdapter,
 	ImageResizeEditing,
 	ImageResizeHandles,
-	ImageResizeButton
+	ImageResizeButton,
+	FontSize,
+	FontColor,
+	FontBackgroundColor
 ];
 
 // Editor configuration.
@@ -79,8 +85,10 @@ ClassicEditor.defaultConfig = {
 		items: [
 			'heading',
 			'|',
+			'fontSize',
 			'bold',
 			'italic',
+			'|',
 			'link',
 			'bulletedList',
 			'numberedList',
@@ -96,6 +104,9 @@ ClassicEditor.defaultConfig = {
 			'undo',
 			'redo'
 		]
+	},
+	fontSize: {
+		options: [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72]
 	},
 	image: {
 		resizeOptions: [
@@ -120,12 +131,21 @@ ClassicEditor.defaultConfig = {
 			'resizeImage:75',
 			'resizeImage:original',
 			'|',
-			'imageStyle:inline',
+			'imageStyle:alignBlockLeft',
 			'imageStyle:block',
-			'imageStyle:side',
+			'imageStyle:alignBlockRight',
 			'|',
 			'toggleImageCaption',
 			'imageTextAlternative'
+		]
+	},
+	heading: {
+		options: [
+			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+			{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+			{ model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' }
 		]
 	},
 	table: {
