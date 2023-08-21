@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+ * @license Copyright (c) 2014-2023, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -7,23 +7,23 @@
 
 /* eslint-env node */
 
-const path = require( 'path' );
-const webpack = require( 'webpack' );
-const { bundler, styles } = require( '@ckeditor/ckeditor5-dev-utils' );
-const { CKEditorTranslationsPlugin } = require( '@ckeditor/ckeditor5-dev-translations' );
-const TerserPlugin = require( 'terser-webpack-plugin' );
+const path = require('path');
+const webpack = require('webpack');
+const { bundler, styles } = require('@ckeditor/ckeditor5-dev-utils');
+const { CKEditorTranslationsPlugin } = require('@ckeditor/ckeditor5-dev-translations');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 module.exports = {
 	devtool: 'source-map',
 	performance: { hints: false },
 
-	entry: path.resolve( __dirname, 'src', 'ckeditor.js' ),
+	entry: path.resolve(__dirname, 'src', 'ckeditor.ts'),
 
 	output: {
 		// The name under which the editor will be exported.
-		library: 'ClassicEditor',
+		library: 'CKSource',
 
-		path: path.resolve( __dirname, 'build' ),
+		path: path.resolve(__dirname, 'build'),
 		filename: 'ckeditor.js',
 		libraryTarget: 'umd',
 		libraryExport: 'default'
@@ -31,7 +31,7 @@ module.exports = {
 
 	optimization: {
 		minimizer: [
-			new TerserPlugin( {
+			new TerserWebpackPlugin({
 				sourceMap: true,
 				terserOptions: {
 					output: {
@@ -40,28 +40,36 @@ module.exports = {
 					}
 				},
 				extractComments: false
-			} )
+			})
 		]
 	},
 
 	plugins: [
-		new CKEditorTranslationsPlugin( {
+		new CKEditorTranslationsPlugin({
 			// UI language. Language codes follow the https://en.wikipedia.org/wiki/ISO_639-1 format.
-			// When changing the built-in language, remember to also change it in the editor's configuration (src/ckeditor.js).
+			// When changing the built-in language, remember to also change it in the editor's configuration (src/ckeditor.ts).
 			language: 'en',
 			additionalLanguages: 'all'
-		} ),
-		new webpack.BannerPlugin( {
+		}),
+		new webpack.BannerPlugin({
 			banner: bundler.getLicenseBanner(),
 			raw: true
-		} )
+		})
 	],
+
+	resolve: {
+		extensions: ['.ts', '.js', '.json']
+	},
 
 	module: {
 		rules: [
 			{
 				test: /\.svg$/,
-				use: [ 'raw-loader' ]
+				use: ['raw-loader']
+			},
+			{
+				test: /\.ts$/,
+				use: 'ts-loader'
 			},
 			{
 				test: /\.css$/,
@@ -75,29 +83,22 @@ module.exports = {
 							}
 						}
 					},
-					'css-loader',
+					{
+						loader: 'css-loader'
+					},
 					{
 						loader: 'postcss-loader',
 						options: {
-							postcssOptions: styles.getPostCssConfig( {
+							postcssOptions: styles.getPostCssConfig({
 								themeImporter: {
-									themePath: require.resolve( '@ckeditor/ckeditor5-theme-lark' )
+									themePath: require.resolve('@ckeditor/ckeditor5-theme-lark')
 								},
 								minify: true
-							} )
+							})
 						}
 					}
 				]
-			},
-			{
-				test: /\.ts$/,
-				use: [ 'ts-loader' ]
 			}
 		]
-	},
-
-	resolve: {
-		extensions: [ '.ts', '.js', '.json' ]
 	}
 };
-
