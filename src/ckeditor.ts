@@ -1,3 +1,4 @@
+import { EditorWatchdog } from '@ckeditor/ckeditor5-watchdog';
 /**
  * @license Copyright (c) 2014-2023, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
@@ -36,7 +37,7 @@ import { TextPartLanguage } from '@ckeditor/ckeditor5-language';
 import { AutoLink, Link, LinkImage } from '@ckeditor/ckeditor5-link';
 import { List, TodoList } from '@ckeditor/ckeditor5-list';
 import { Markdown } from '@ckeditor/ckeditor5-markdown-gfm';
-import { MediaEmbed, MediaEmbedToolbar } from '@ckeditor/ckeditor5-media-embed';
+import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
 import { RemoveFormat } from '@ckeditor/ckeditor5-remove-format';
@@ -68,7 +69,7 @@ import { WordCount } from '@ckeditor/ckeditor5-word-count';
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
 // See https://ckeditor.com/docs/ckeditor5/latest/installation/plugins/installing-plugins.html for details.
 
-class Editor extends ClassicEditorBase {
+class ClassicEditor extends ClassicEditorBase {
 	public static override builtinPlugins = [
 		Alignment,
 		AutoImage,
@@ -107,7 +108,6 @@ class Editor extends ClassicEditorBase {
 		List,
 		Markdown,
 		MediaEmbed,
-		MediaEmbedToolbar,
 		Paragraph,
 		PasteFromOffice,
 		RemoveFormat,
@@ -213,9 +213,8 @@ class Editor extends ClassicEditorBase {
 		},
 		table: {
 			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
-		},
-		removePlugins: ['MediaEmbedToolbar']
+		}
 	};
 }
 
-export default Editor;
+export default ClassicEditor;
