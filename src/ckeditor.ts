@@ -213,7 +213,8 @@ class Editor extends ClassicEditorBase {
 		},
 		table: {
 			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
-		}
+		},
+		removePlugins: ['MediaEmbedToolbar']
 	};
 }
 
