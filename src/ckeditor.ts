@@ -9,13 +9,13 @@ import { ClassicEditor as ClassicEditorBase } from '@ckeditor/ckeditor5-editor-c
 import { Alignment } from '@ckeditor/ckeditor5-alignment';
 import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
 import { Autosave } from '@ckeditor/ckeditor5-autosave';
-import { Bold, Code, Italic, Strikethrough, Subscript, Underline } from '@ckeditor/ckeditor5-basic-styles';
+import { Bold, Code, Italic, Strikethrough, Subscript, Superscript, Underline } from '@ckeditor/ckeditor5-basic-styles';
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
 import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import { CodeBlock } from '@ckeditor/ckeditor5-code-block';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
 import { FindAndReplace } from '@ckeditor/ckeditor5-find-and-replace';
-import { FontBackgroundColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
+import { FontBackgroundColor, FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
 import { Heading } from '@ckeditor/ckeditor5-heading';
 import { HeadingOption, HeadingParagraphOption } from '@ckeditor/ckeditor5-heading/src/headingconfig';
 import { Highlight } from '@ckeditor/ckeditor5-highlight';
@@ -64,6 +64,7 @@ import {
 	TableToolbar
 } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
+import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
 
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
@@ -88,6 +89,7 @@ class ClassicEditor extends ClassicEditorBase {
 		FontBackgroundColor,
 		FontFamily,
 		FontSize,
+		FontColor,
 		GeneralHtmlSupport,
 		Heading,
 		Highlight,
@@ -100,6 +102,7 @@ class ClassicEditor extends ClassicEditorBase {
 		ImageStyle,
 		ImageToolbar,
 		ImageUpload,
+		Base64UploadAdapter,
 		Indent,
 		IndentBlock,
 		Italic,
@@ -125,6 +128,7 @@ class ClassicEditor extends ClassicEditorBase {
 		Strikethrough,
 		Style,
 		Subscript,
+		Superscript,
 		Table,
 		TableCaption,
 		TableCellProperties,
@@ -144,23 +148,25 @@ class ClassicEditor extends ClassicEditorBase {
 				'heading',
 				'|',
 				'fontSize',
+				'fontColor',
 				'fontBackgroundColor',
 				'bold',
-				'underline',
 				'italic',
+				'underline',
 				'subscript',
-				'alignment',
+				'superscript',
 				'|',
+				'alignment',
+				'outdent',
+				'indent',
 				'todoList',
 				'bulletedList',
 				'numberedList',
-				'outdent',
-				'indent',
+				'insertTable',
 				'|',
 				'imageInsert',
 				'mediaEmbed',
 				'link',
-				'insertTable',
 				'|',
 				'undo',
 				'redo'
