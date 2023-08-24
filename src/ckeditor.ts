@@ -36,7 +36,6 @@ import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
 import { TextPartLanguage } from '@ckeditor/ckeditor5-language';
 import { AutoLink, Link, LinkImage } from '@ckeditor/ckeditor5-link';
 import { List, TodoList } from '@ckeditor/ckeditor5-list';
-import { Markdown } from '@ckeditor/ckeditor5-markdown-gfm';
 import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
@@ -109,7 +108,6 @@ class ClassicEditor extends ClassicEditorBase {
 		Link,
 		LinkImage,
 		List,
-		Markdown,
 		MediaEmbed,
 		Paragraph,
 		PasteFromOffice,
